@@ -1,0 +1,12 @@
+<% include partials/header %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-2" align="center">
+      <p><img src="<%= data.user.userdata.image %>" alt="image"></p>
+      <p><label>Username  :</label><%= data.user.userdata.username %></p>
+      <p><label>Email : </label><%= data.user.userdata.email %></p>
+    </div>
+  </div>
+</div>
+<% include partials/footer %>

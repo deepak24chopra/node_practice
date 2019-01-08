@@ -1,0 +1,43 @@
+<% include partials/header%>
+<script type="text/javascript">
+    function bringFields(val) {
+      fetch('getFieldsTypes/'+val).then(function(response) {
+        //console.log(response);
+        response.text().then(function(text) {
+            document.getElementById("form_type").innerHTML = text;
+        })
+        //document.getElementById("form_type").innerHTML = response;
+      }).catch(function(error) {
+        console.log(error);
+      });
+    }
+</script>
+  <div class="container">
+    <div class="col-md-6 col-md-offset-3">
+      <form class="form-horizontal" action="/editProfile" method="post">
+        <div class="form-group">
+          <label class="control-label">Username</label>
+          <input class="form-control" type="text" name="username" <% if(data.user.userdata.username.trim()) {%> value="<%= data.user.userdata.username%>"<% } %> placeholder="Enter username">
+        </div>
+        <div class="form-group">
+          <label class="control-label">Email</label>
+          <input class="form-control" type="email" name="email" <% if(data.user.userdata.email.trim()) {%> value="<%= data.user.userdata.email%>"<% } %> placeholder="Enter email">
+        </div>
+        <div class="form-group">
+          <label class="control-label">User Types</label>
+          <select class="form-control" name="user_types" onchange="bringFields(this.value)">
+            <option value="Select" selected disabled>Select Type</option>
+            <% data.user_types.forEach((type) => {  %>
+              <option value="<%= type.type %>"><%= type.type %></option>
+            <% }); %>
+          </select>
+        </div>
+        <div id="form_type">
+        </div>
+        <div class="form-group">
+          <input type="Submit" name="Update" class="btn btn-primary">
+        </div>
+      </form>
+    </div>
+  </div>
+<% include partials/footer%>

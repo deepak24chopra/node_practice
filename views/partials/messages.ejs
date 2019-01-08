@@ -1,0 +1,5 @@
+<div class="container">
+  <% for(var key in data.messages) { %>
+    <div class="alert alert-<%= key %>" role="alert"><%= data.messages[key]; %></div>
+  <% } %>
+</div>
